@@ -10,32 +10,30 @@
 
     <body>
         <!-- this is the name of the page and the links to the other pages -->
-        <div class="PageHead">
-            <a>College Projects</a>
-            <a class="Link" href="index.html">Home</a>
-            <a class="Link" href="HobbyProjects.html">Hobby Projects</a>
-            <a class="Link" href="CollegeProjects.html">College Projects</a>
-        </div>
+        <header>
+            <h1>College Projects</h1>
+            <nav>
+                <a class="Link" href="index.html">Home</a>
+                <a class="Link" href="HobbyProjects.html">Hobby Projects</a>
+                <a class="Link" href="CollegeProjects.html">College Projects</a>
+            </nav>
+        </header>
 
         <main>
-
             <!-- Hash Table Article -->
             <article>
-                <hr>
-                    <h1> Hash Table Database</h1>
-                    <h2>C Hash Table is a project to learn about how hash tables are constructed and how to deal with their various problems.</h2>
-                </hr size="30">
+                <h2>Hash Table Database</h2>
+                <p><b>C Hash Table is a project to learn about how hash tables are constructed and how to deal with their various problems.</b></p>
 
-                <br><a class="Link" href="https://github.com/elnachoes/CSE222/tree/master/PA3">Source Code</a></br>
+                <p><a class="Link" href="https://github.com/elnachoes/CSE222/tree/master/PA3">Source Code</a></p>
 
-                <li>The project started as an assignment for a data structures class in order to study how hash tables work.</li>
-                <li>The project uses a fixed size hash table and utilizes chaining as a means of collision management rather than something more complex such as probing. If the hash table encounters a collision with its hashing algorithm it creates a sentinel node to a linked list at each index of the hash table and if a collision occurs it will append the hash name and data to the linked list stored at that hash index.</li>
-                <li>The hash table does not undergo load management and because it is a fixed size, performance and efficiency can degrade with the growing size of the data stored in the hash table.</li>
-                <li>The project has been a very good learning experience to gain more insight into how hash tables are constructed.</li>
-
-                </article>
-
+                <ul>
+                    <li>The project started as an assignment for a data structures class in order to study how hash tables work.</li>
+                    <li>The project uses a fixed size hash table and utilizes chaining as a means of collision management rather than something more complex such as probing. If the hash table encounters a collision with its hashing algorithm it creates a sentinel node to a linked list at each index of the hash table and if a collision occurs it will append the hash name and data to the linked list stored at that hash index.</li>
+                    <li>The hash table does not undergo load management and because it is a fixed size, performance and efficiency can degrade with the growing size of the data stored in the hash table.</li>
+                    <li>The project has been a very good learning experience to gain more insight into how hash tables are constructed.</li>
+                </ul>
+            </article>
         </main>
     </body>
-
 </html>
