@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Corbin Martin Hobby Projects</title>
-        <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="../css/index.css" media="screen" />
     </head>
 
     <body>
@@ -24,43 +24,43 @@
             <!-- basic echo server article -->
             <article>
                 <h2>Basic Echo Server</h2>
-                <p><b>Basic Echo Server is a multithreaded socket server written in C# and Dotnet 6 that echoes messages sent from clients connecting over telnet.</b></p>
+                <p><b>Basic Echo Server is a multi-threaded socket server written in C# and Dotnet 6 that echoes messages sent from clients connecting over telnet.</b></p>
 
                 <p><a class="Link" href="https://github.com/elnachoes/BasicEchoServer">Source Code</a></p>
 
                 <ul>
-                    <li>The project started as a learning experience to learn how to communicate over tcp sockets and how to write multithreaded code that can be useful during synchronous blocking calls such as synchronous receives over sockets.</li>
+                    <li>The project started as a learning experience to learn how to communicate over tcp sockets and how to write multi-threaded code that can be useful during synchronous blocking calls such as synchronous receives over sockets.</li>
                     <li>Early in development, the project started with a server application that communicated over sockets asynchronously by using a thread to accept new clients and for each client that connected, a thread was created to synchronously receive data from that socket.</li>
                     <li>Later on in development, a connection object was created as a means of encapsulating communication between sockets. The connection object could handle the shut down of a socket, synchronous sends, synchronous receives, and even asynchronous receives. Asynchronous receives and socket shutdowns also invoked call back functions.</li>
                     <li>The project moved from a thread-per-client model on the server to a asynchronous receive model on the connection object to alleviate cpu overhead from context switching between threads and so the client applications could also do asynchronous receive.</li>
                 </ul>
 
-                <img src="BasicEchoServer.jpg">
+                <img src="../images/BasicEchoServer.jpg">
             </article>
 
             <!-- Fast Primes 2 article -->
             <article>
                 <h2>Fast Primes 2</h2>
-                <p><b>Primes 2 is a multithreaded prime numbers calculator written in C# and Dotnet 6.</b></p>
+                <p><b>Primes 2 is a multi-threaded prime numbers calculator written in C# and Dotnet 6.</b></p>
 
                 <p><a class="Link" href="https://github.com/elnachoes/FastPrimes2">Source Code</a></p>
 
                 <ul>
-                    <li>This is a sequel project to a single threaded prime numbers calculator written in C where the Sieve of Eratosthenes and other optimizations were used in order to significantly decrease the number of calculations needed in order to check if a number is prime. On a ryzen 5 3600 cpu machine, the 5 millionth prime on the original single threaded Fast Primes project could be found in about 196 seconds.</li>
-                    <li>Fast Primes 2 takes advantage of a parallel foreach from the Parallel library to multithread testing of potentially prime number.</li>
+                    <li>This is a sequel project to a single threaded prime numbers calculator written in C where the Sieve of Eratosthenes and other optimizations were used in order to significantly decrease the number of calculations needed in order to check if a number is prime. On a Ryzen 5 3600 cpu machine, the 5 millionth prime on the original single threaded Fast Primes project could be found in about 196 seconds.</li>
+                    <li>Fast Primes 2 takes advantage of a parallel foreach from the Parallel library to multi-thread testing of potentially prime number.</li>
                     <li>The parallel foreach divides out potentially prime numbers and if they are prime they are added to a list inside of a mutex for thread safety that will be sorted by a LINQ statement and counted later on to determine the current prime position.</li>
                     <li>The application can be given 2 command line arguments for the Nth prime you wish to find and how many potentially prime numbers do you wish to test at a given iteration of the parallel foreach loop.</li>
-                    <li>The project turned out to be very successful with the 5 millionth prime being calculated on a ryzen 5 3600 cpu machine with 10k potential primes to test per iteration of the parallel foreach loop in just under 33 seconds.</li>
-                    <li>The application performed even better with a ryzen 9 5900x cpu machine under the same conditions finding the 5 millionth prime in just over 5 seconds.</li>
+                    <li>The project turned out to be very successful with the 5 millionth prime being calculated on a Ryzen 5 3600 cpu machine with 10k potential primes to test per iteration of the parallel foreach loop in just under 33 seconds.</li>
+                    <li>The application performed even better with a Ryzen 9 5900x cpu machine under the same conditions finding the 5 millionth prime in just over 5 seconds.</li>
                 </ul>
 
-                <img src="FastPrimes2.png">
+                <img src="../images/FastPrimes2.png">
             </article>
 
             <!-- Toon Tanks -->
             <article>
                 <h2>Toon Tanks</h2>
-                <p><b>Toon Tanks is a game written in Unreal 4 and C++ to learn about writing games in the unreal engine following along in a udemy course.</b></p>
+                <p><b>Toon Tanks is a game written in Unreal 4 and C++ to learn about writing games in the unreal engine following along in a Udemy course.</b></p>
 
                 <p><a class="Link" href="https://github.com/elnachoes/ToonTanks">Source Code</a></p>
 
@@ -68,10 +68,10 @@
                     <li>The game is about creating a tank that can move around and shoot projectiles at turrets and if all the turrets are destroyed the player wins.</li>
                     <li>The idea of composition vs inheritance is very central to the learning experience of this project where it may be important to consider what items are specific enough to be a component vs what items can be inherited from some base class.</li>
                     <li>In the project multiple objects inherit from a base class such as the turret and the tank but they override methods in the base class in their own unique ways depending on what their purposes are.</li>
-                    <li>The project deviates from the udemy guide by using custom 3d models that had to be modified in blender in order to fix problems with collisions inside the unreal engine.</li>
+                    <li>The project deviates from the Udemy guide by using custom 3d models that had to be modified in blender in order to fix problems with collisions inside the unreal engine.</li>
                 </ul>
 
-                <img src="toontanksExample.png">
+                <img src="../images/toontanksExample.png">
             </article>
         </main>
     </body>
