@@ -47,6 +47,20 @@ li
     font-size: 120%;
 }
 
+pre
+{
+    color : salmon ;
+    background-color: blue;
+    border-radius: 25px;
+}
+
+h2
+{
+    color: red;
+    font-style: italic;
+    text-decoration: underline;
+}
+
 /*
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
