@@ -26,7 +26,7 @@
                 <h2>Basic Echo Server</h2>
                 <p><b>Basic Echo Server is a multi-threaded socket server written in C# and Dotnet 6 that echoes messages sent from clients connecting over telnet.</b></p>
 
-                <p><a class="Link" href="https://github.com/elnachoes/BasicEchoServer">Source Code</a></p>
+                <p><a class="SourceLink" href="https://github.com/elnachoes/BasicEchoServer">Source Code</a></p>
 
                 <ul>
                     <li>The project started as a learning experience to learn how to communicate over tcp sockets and how to write multi-threaded code that can be useful during synchronous blocking calls such as synchronous receives over sockets.</li>
@@ -37,114 +37,114 @@
 
                 <pre>
                     <code>
-                        using System.Net.Sockets;
+using System.Net.Sockets;
 
-                        public class Connection
-                        {
-                            public delegate void ReceiveCallback(byte[] buffer, int bytesReceived, Connection connection);
-                            public delegate void ConnectionShutdownCallback(Connection connection);
+public class Connection
+{
+    public delegate void ReceiveCallback(byte[] buffer, int bytesReceived, Connection connection);
+    public delegate void ConnectionShutdownCallback(Connection connection);
 
-                            private Socket _connectionSocket;
+    private Socket _connectionSocket;
 
-                            public bool _isConnected { get; private set; }
+    public bool _isConnected { get; private set; }
 
-                            private ReceiveCallback _recieveCallback { get; set; }
-                            private ConnectionShutdownCallback _connectionShutdownCallback { get; set; }
+    private ReceiveCallback _recieveCallback { get; set; }
+    private ConnectionShutdownCallback _connectionShutdownCallback { get; set; }
 
-                            public byte[] _buffer { get; set; }
-                            public int _offset { get; set; }
-                            public int _size { get; set; }
+    public byte[] _buffer { get; set; }
+    public int _offset { get; set; }
+    public int _size { get; set; }
 
-                            public Connection(Socket newConnectionSocket, ConnectionShutdownCallback connectionShutdownCallback, ReceiveCallback receiveCallback)
-                            {
-                                _connectionSocket = newConnectionSocket;
-                                _isConnected = true;
-                                _connectionShutdownCallback = connectionShutdownCallback;
-                                _recieveCallback = receiveCallback;
-                            }
+    public Connection(Socket newConnectionSocket, ConnectionShutdownCallback connectionShutdownCallback, ReceiveCallback receiveCallback)
+    {
+        _connectionSocket = newConnectionSocket;
+        _isConnected = true;
+        _connectionShutdownCallback = connectionShutdownCallback;
+        _recieveCallback = receiveCallback;
+    }
 
-                            //public delegate void EndRec
+    //public delegate void EndRec
 
-                            public int Send(byte[] newBuffer, int newSize)
-                            {
-                                try
-                                {
-                                    int bytesTransferred = _connectionSocket.Send(newBuffer, newSize, SocketFlags.None);
-                                    if (bytesTransferred == 0)
-                                    {
-                                        ShutDownSocket();
-                                        return 0;
-                                    }
-                                    return bytesTransferred;
-                                }
-                                catch (Exception)
-                                {
-                                    ShutDownSocket();
-                                    return 0;
-                                }
-                            }
+    public int Send(byte[] newBuffer, int newSize)
+    {
+        try
+        {
+            int bytesTransferred = _connectionSocket.Send(newBuffer, newSize, SocketFlags.None);
+            if (bytesTransferred == 0)
+            {
+                ShutDownSocket();
+                return 0;
+            }
+            return bytesTransferred;
+        }
+        catch (Exception)
+        {
+            ShutDownSocket();
+            return 0;
+        }
+    }
 
-                            public int Receive(byte[] newBuffer, int newOffset, int newSize)
-                            {
-                                try
-                                {
-                                    int bytesTransferred = _connectionSocket.Receive(newBuffer, newOffset, newSize, SocketFlags.None);
-                                    if (bytesTransferred == 0)
-                                    {
-                                        ShutDownSocket();
-                                        return 0;
-                                    }
-                                    return bytesTransferred;
-                                }
-                                catch (Exception)
-                                {
-                                    ShutDownSocket();
-                                    return 0;
-                                }
-                            }
+    public int Receive(byte[] newBuffer, int newOffset, int newSize)
+    {
+        try
+        {
+            int bytesTransferred = _connectionSocket.Receive(newBuffer, newOffset, newSize, SocketFlags.None);
+            if (bytesTransferred == 0)
+            {
+                ShutDownSocket();
+                return 0;
+            }
+            return bytesTransferred;
+        }
+        catch (Exception)
+        {
+            ShutDownSocket();
+            return 0;
+        }
+    }
 
-                            public void StartReceiving(byte[] newBuffer, int newOffset, int newSize)
-                            {
-                                _buffer = newBuffer;
-                                _offset = newOffset;
-                                _size =  newSize;
+    public void StartReceiving(byte[] newBuffer, int newOffset, int newSize)
+    {
+        _buffer = newBuffer;
+        _offset = newOffset;
+        _size =  newSize;
 
-                                BeginReceive();
-                            }
+        BeginReceive();
+    }
 
-                            private IAsyncResult BeginReceive()
-                            {
-                                return _connectionSocket.BeginReceive(_buffer, _offset, _size, SocketFlags.None, EndReceive, null);
-                            }
+    private IAsyncResult BeginReceive()
+    {
+        return _connectionSocket.BeginReceive(_buffer, _offset, _size, SocketFlags.None, EndReceive, null);
+    }
 
-                            private void EndReceive(IAsyncResult asyncResult)
-                            {
-                                try
-                                {
-                                    var bytesReceived = _connectionSocket.EndReceive(asyncResult);
-                                    if (bytesReceived == 0)
-                                    {
-                                        ShutDownSocket();
-                                        return;
-                                    }
-                                    _recieveCallback(_buffer, bytesReceived, this);
-                                    BeginReceive();
-                                }
-                                catch (Exception)
-                                {
-                                    ShutDownSocket();
-                                    return;
-                                }
-                            }
+    private void EndReceive(IAsyncResult asyncResult)
+    {
+        try
+        {
+            var bytesReceived = _connectionSocket.EndReceive(asyncResult);
+            if (bytesReceived == 0)
+            {
+                ShutDownSocket();
+                return;
+            }
+            _recieveCallback(_buffer, bytesReceived, this);
+            BeginReceive();
+        }
+        catch (Exception)
+        {
+            ShutDownSocket();
+            return;
+        }
+    }
 
-                            public void ShutDownSocket()
-                            {
-                                _connectionSocket.Shutdown(SocketShutdown.Both);
-                                _connectionSocket.Close();
-                                _isConnected = false;
-                                _connectionShutdownCallback(this);
-                            }
-                        }
+    public void ShutDownSocket()
+    {
+        _connectionSocket.Shutdown(SocketShutdown.Both);
+        _connectionSocket.Close();
+        _isConnected = false;
+        _connectionShutdownCallback(this);
+    }
+}
                     </code>
                 </pre>
 
@@ -156,7 +156,7 @@
                 <h2>Fast Primes 2</h2>
                 <p><b>Primes 2 is a multi-threaded prime numbers calculator written in C# and Dotnet 6.</b></p>
 
-                <p><a class="Link" href="https://github.com/elnachoes/FastPrimes2">Source Code</a></p>
+                <p><a class="SourceLink" href="https://github.com/elnachoes/FastPrimes2">Source Code</a></p>
 
                 <ul>
                     <li>This is a sequel project to a single threaded prime numbers calculator written in C where the Sieve of Eratosthenes and other optimizations were used in order to significantly decrease the number of calculations needed in order to check if a number is prime. On a Ryzen 5 3600 cpu machine, the 5 millionth prime on the original single threaded Fast Primes project could be found in about 196 seconds.</li>
@@ -171,19 +171,19 @@
 
                 <pre>
                     <code>
-                        // parallel foreach that uses a thread for each possible prime in the array to test if it is prime
-                        var ParrallelForEachResult = Parallel.ForEach(PossiblePrimes, new ParallelOptions(), (PossibleValue) =>
-                        {
-                            if (Prime.CheckIfPrime(PossibleValue))
-                            {
-                                lock (LockObject)
-                                {
-                                    // if the number is prime add it to the list and increment the current prime position
-                                    FoundPrimes.Add(PossibleValue);
-                                    ++CurrentPrimePosition;
-                                }
-                            }
-                        });
+// parallel foreach that uses a thread for each possible prime in the array to test if it is prime
+var ParrallelForEachResult = Parallel.ForEach(PossiblePrimes, new ParallelOptions(), (PossibleValue) =>
+{
+    if (Prime.CheckIfPrime(PossibleValue))
+    {
+        lock (LockObject)
+        {
+            // if the number is prime add it to the list and increment the current prime position
+            FoundPrimes.Add(PossibleValue);
+            ++CurrentPrimePosition;
+        }
+    }
+});
                     </code>
                 </pre>
             </article>
@@ -193,7 +193,7 @@
                 <h2>Toon Tanks</h2>
                 <p><b>Toon Tanks is a game written in Unreal 4 and C++ to learn about writing games in the unreal engine following along in a Udemy course.</b></p>
 
-                <p><a class="Link" href="https://github.com/elnachoes/ToonTanks">Source Code</a></p>
+                <p><a class="SourceLink" href="https://github.com/elnachoes/ToonTanks">Source Code</a></p>
 
                 <ul>
                     <li>The game is about creating a tank that can move around and shoot projectiles at turrets and if all the turrets are destroyed the player wins.</li>
@@ -206,67 +206,67 @@
 
                 <pre>
                     <code>
-                        #include "PawnTank.h"
-                        #include "GameFramework/SpringArmComponent.h"
-                        #include "Camera/CameraComponent.h"
-                        #include "Math/UnrealMathUtility.h"
+#include "PawnTank.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
+#include "Math/UnrealMathUtility.h"
 
 
-                        APawnTank::APawnTank()
-                        {
-                            SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
-                            SpringArm->SetupAttachment(RootComponent);
+APawnTank::APawnTank()
+{
+    SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
+    SpringArm->SetupAttachment(RootComponent);
 
-                            Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-                            Camera->SetupAttachment(SpringArm);
-                        }
+    Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+    Camera->SetupAttachment(SpringArm);
+}
 
-                        //Called when the game starts or when spawned
-                        void APawnTank::BeginPlay()
-                        {
-                            Super::BeginPlay();
-                        }
+//Called when the game starts or when spawned
+void APawnTank::BeginPlay()
+{
+    Super::BeginPlay();
+}
 
-                        // Called every frame
-                        void APawnTank::Tick(float DeltaTime)
-                        {
-                            Super::Tick(DeltaTime);
-                            Rotate();
-                            Move();
-                        }
+// Called every frame
+void APawnTank::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+    Rotate();
+    Move();
+}
 
-                        // Called to bind functionality to input
-                        void APawnTank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-                        {
-                            Super::SetupPlayerInputComponent(PlayerInputComponent);
+// Called to bind functionality to input
+void APawnTank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+    Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-                            PlayerInputComponent->BindAxis("MoveForward", this, &APawnTank::CalculateMoveInput);
-                            PlayerInputComponent->BindAxis("Turn", this, &APawnTank::CalculateRotateInput);
-                        }
+    PlayerInputComponent->BindAxis("MoveForward", this, &APawnTank::CalculateMoveInput);
+    PlayerInputComponent->BindAxis("Turn", this, &APawnTank::CalculateRotateInput);
+}
 
-                        void APawnTank::CalculateMoveInput(float Value)
-                        {
-                            //fps independance by multiplying by DeltaTimeSeconds
-                            MoveDirection = FVector(Value * MoveSpeed * GetWorld()->DeltaTimeSeconds, 0, 0);
-                        }
+void APawnTank::CalculateMoveInput(float Value)
+{
+    //fps independance by multiplying by DeltaTimeSeconds
+    MoveDirection = FVector(Value * MoveSpeed * GetWorld()->DeltaTimeSeconds, 0, 0);
+}
 
-                        void APawnTank::CalculateRotateInput(float Value)
-                        {
-                            //fps independance by multiplying by DeltaTimeSeconds
-                            float RotateAmount = Value * RotateSpeed * GetWorld()->DeltaTimeSeconds;
-                            FRotator Rotation = FRotator(0, RotateAmount, 0);
-                            RotationDirection = FQuat(Rotation);
-                        }
+void APawnTank::CalculateRotateInput(float Value)
+{
+    //fps independance by multiplying by DeltaTimeSeconds
+    float RotateAmount = Value * RotateSpeed * GetWorld()->DeltaTimeSeconds;
+    FRotator Rotation = FRotator(0, RotateAmount, 0);
+    RotationDirection = FQuat(Rotation);
+}
 
-                        void APawnTank::Move()
-                        {
-                            AddActorLocalOffset(MoveDirection, true);
-                        }
+void APawnTank::Move()
+{
+    AddActorLocalOffset(MoveDirection, true);
+}
 
-                        void APawnTank::Rotate()
-                        {
-                            AddActorLocalRotation(RotationDirection, true);
-                        }
+void APawnTank::Rotate()
+{
+    AddActorLocalRotation(RotationDirection, true);
+}
                     </code>
                 </pre>
             </article>

@@ -26,7 +26,7 @@
                 <h2>Knapsack Problem ( CSE222 : Data Structures, C )</h2>
                 <p><b>A solution to the Knapsack problem using recursion and dynamic programming</b></p>
 
-                <p><a class="Link" href="https://github.com/elnachoes/CSE222/tree/master/PA5">Source Code</a></p>
+                <p><a class="SourceLink" href="https://github.com/elnachoes/CSE222/tree/master/PA5">Source Code</a></p>
 
                 <ul>
                     <li>This is a recursive solution to the knapsack problem that utilizes dynamic programming.</li>
@@ -37,56 +37,56 @@
                 <!-- Knapsack MaxValue Function -->
                 <pre>
                     <code>
-                        Answer MaxValue(int capacity, ItemDataBase database, bool firstCall)
-                        {
-                            //maxValueCache is better if it is static because it is only used by MaxValue() and it needs to be preserved between recursive calls
-                            static Answer maxValueCache[ITEM_BUFFER][CAPACITIES_BUFFER];
+Answer MaxValue(int capacity, ItemDataBase database, bool firstCall)
+{
+    //maxValueCache is better if it is static because it is only used by MaxValue() and it needs to be preserved between recursive calls
+    static Answer maxValueCache[ITEM_BUFFER][CAPACITIES_BUFFER];
 
-                            //if the first call flag is triggered initialize maxValueCache to have a -1 in each value field and set the firstCall flag to false
-                            if (firstCall)
-                            {
-                                for (int i = 0; i < ITEM_BUFFER; i++)
-                                    for (int j = 0; j < CAPACITIES_BUFFER; j++)
-                                        maxValueCache[i][j].value = -1;
-                                firstCall = false;
-                            }
+    //if the first call flag is triggered initialize maxValueCache to have a -1 in each value field and set the firstCall flag to false
+    if (firstCall)
+    {
+        for (int i = 0; i < ITEM_BUFFER; i++)
+            for (int j = 0; j < CAPACITIES_BUFFER; j++)
+                maxValueCache[i][j].value = -1;
+        firstCall = false;
+    }
 
-                            //bestAnswer always defaults to zero in the event that you cant fit any items into the new cap
-                            Answer bestAnswer = { 0, {0} };
+    //bestAnswer always defaults to zero in the event that you cant fit any items into the new cap
+    Answer bestAnswer = { 0, {0} };
 
-                            //for each item in the item list find the best values for the amount of items to their values
-                            for (int i = 0; i < database.itemCount; i++)
-                            {
-                                //if the weight is greater than the capacity don't try to calculate a best value because there is none
-                                if (database.weight[i] <= capacity)
-                                {
-                                    int newValue;
-                                    Answer newAnswer;
+    //for each item in the item list find the best values for the amount of items to their values
+    for (int i = 0; i < database.itemCount; i++)
+    {
+        //if the weight is greater than the capacity don't try to calculate a best value because there is none
+        if (database.weight[i] <= capacity)
+        {
+            int newValue;
+            Answer newAnswer;
 
-                                    //if the MaxValue was already calculated for a certain value retrieve it from the cache
-                                    if (maxValueCache[i][capacity - database.weight[i]].value != -1)
-                                    {
-                                        newAnswer = maxValueCache[i][capacity - database.weight[i]];
-                                        newValue = database.value[i] + newAnswer.value;
-                                    }
-                                    //if the MaxValue was NOT already calculated go calculate it
-                                    else
-                                    {
-                                        newAnswer = MaxValue(capacity - database.weight[i], database, firstCall);
-                                        maxValueCache[i][capacity - database.weight[i]] = newAnswer;
-                                        newValue = database.value[i] + newAnswer.value;
-                                    }
+            //if the MaxValue was already calculated for a certain value retrieve it from the cache
+            if (maxValueCache[i][capacity - database.weight[i]].value != -1)
+            {
+                newAnswer = maxValueCache[i][capacity - database.weight[i]];
+                newValue = database.value[i] + newAnswer.value;
+            }
+            //if the MaxValue was NOT already calculated go calculate it
+            else
+            {
+                newAnswer = MaxValue(capacity - database.weight[i], database, firstCall);
+                maxValueCache[i][capacity - database.weight[i]] = newAnswer;
+                newValue = database.value[i] + newAnswer.value;
+            }
 
-                                    if (newValue > bestAnswer.value)
-                                    {
-                                        bestAnswer = newAnswer;
-                                        bestAnswer.value = newValue;
-                                        ++bestAnswer.inventory[i];
-                                    }
-                                }
-                            }
-                            return bestAnswer;
-                        }
+            if (newValue > bestAnswer.value)
+            {
+                bestAnswer = newAnswer;
+                bestAnswer.value = newValue;
+                ++bestAnswer.inventory[i];
+            }
+        }
+    }
+    return bestAnswer;
+}
                     </code>
                 </pre>
             </article>
@@ -97,7 +97,7 @@
                 <h2>Binary Search Tree Database ( CSE222 : Data Structures, C )</h2>
                 <p><b>A binary search tree utilizing only recursive algorithms for adding, searching, deleting, freeing, printing, and determining height</b></p>
 
-                <p><a class="Link" href="https://github.com/elnachoes/CSE222/tree/master/PA4Debug">Source Code</a></p>
+                <p><a class="SourceLink" href="https://github.com/elnachoes/CSE222/tree/master/PA4Debug">Source Code</a></p>
 
                 <ul>
                     <li>This is a program similar to a hash table program we wrote in the same data structures class that sorts data based on license plate numbers into a binary tree.</li>
@@ -108,34 +108,34 @@
                 <!-- PA4 Printing Traversal Algorithms -->
                 <pre>
                     <code>
-                        //goes through the and prints the left node, the node, and the right node in an LNR traversal
-                        void LNR(Node root)
-                        {
-                            if (!root) return;
-                            LNR(root->left);
-                            printf("Plate: <%s> Name: %s,%s\r\n", root->plate, root->last, root->first);
-                            LNR(root->right);
-                        }
+//goes through the and prints the left node, the node, and the right node in an LNR traversal
+void LNR(Node root)
+{
+    if (!root) return;
+    LNR(root->left);
+    printf("Plate: <%s> Name: %s,%s\r\n", root->plate, root->last, root->first);
+    LNR(root->right);
+}
 
-                        //goes through the and prints the the node, the left node, and right node in an LNR traversal
-                        //(pre order)
-                        void NLR(Node root)
-                        {
-                            if (!root) return;
-                            printf("Plate: <%s> Name: %s,%s\r\n", root->plate, root->last, root->first);
-                            NLR(root->left);
-                            NLR(root->right);
-                        }
+//goes through the and prints the the node, the left node, and right node in an LNR traversal
+//(pre order)
+void NLR(Node root)
+{
+    if (!root) return;
+    printf("Plate: <%s> Name: %s,%s\r\n", root->plate, root->last, root->first);
+    NLR(root->left);
+    NLR(root->right);
+}
 
-                        //goes through the and prints the left node, right node and then the node in an LNR traversal
-                        //(post order)
-                        void LRN(Node root)
-                        {
-                            if (!root) return;
-                            LRN(root->left);
-                            LRN(root->right);
-                            printf("Plate: <%s> Name: %s,%s\r\n", root->plate, root->last, root->first);
-                        }
+//goes through the and prints the left node, right node and then the node in an LNR traversal
+//(post order)
+void LRN(Node root)
+{
+    if (!root) return;
+    LRN(root->left);
+    LRN(root->right);
+    printf("Plate: <%s> Name: %s,%s\r\n", root->plate, root->last, root->first);
+}
                     </code>
                 </pre>
             </article>
@@ -144,7 +144,7 @@
                 <h2>Hash Table Database ( CSE222 : Data Structures, C )</h2>
                 <p><b>C Hash Table is a project to learn about how hash tables are constructed and how to deal with their various problems.</b></p>
 
-                <p><a class="Link" href="https://github.com/elnachoes/CSE222/tree/master/PA3">Source Code</a></p>
+                <p><a class="SourceLink" href="https://github.com/elnachoes/CSE222/tree/master/PA3">Source Code</a></p>
 
                 <ul>
                     <li>The project started as an assignment for a data structures class in order to study how hash tables work.</li>
@@ -156,16 +156,16 @@
                 <!-- PA3 hash algorithm -->
                 <pre>
                     <code>
-                        //creates a index for an item to be stored in the hash table based on the input string
-                        int hash(char* plate)
-                        {
-                            int hashResult = 0;
-                            for (int i = 0; i <= strlen(plate) - 1; i++)
-                            {
-                                hashResult += (((i + 1) * (i + 1)) * plate[i]);
-                            }
-                            return hashResult % _hashSize;
-                        }
+//creates a index for an item to be stored in the hash table based on the input string
+int hash(char* plate)
+{
+    int hashResult = 0;
+    for (int i = 0; i <= strlen(plate) - 1; i++)
+    {
+        hashResult += (((i + 1) * (i + 1)) * plate[i]);
+    }
+    return hashResult % _hashSize;
+}
                     </code>
                 </pre>
             </article>
