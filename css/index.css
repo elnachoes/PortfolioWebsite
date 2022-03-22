@@ -2,21 +2,15 @@
 {
     color-scheme: light;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-}
-
-html
-{
-    background: linear-gradient(rgba(200, 200, 200, 0.8), rgba(200, 200, 200, 0.8)), url('../images/BackgroundImage2.JPG');
-	background-size:cover;
-    background-repeat: no-repeat;
-    background-position: top center;
-    min-height: 100%;
-
 }
 
 body
 {
+    background: linear-gradient(rgba(173, 163, 167, 0.9), rgba(173, 163, 167, 0.9)), url('../images/hexagonal.jpg');
+    background-repeat: repeat;
+    background-position: top center;
+    min-height: 100%;
+
     max-width: 1280px;
     margin: auto;
     padding: 16px;
@@ -33,13 +27,14 @@ header
 
 header a
 {
-    background-color: rgb(112, 83, 59);
+    background-color: rgb(128, 156, 115);
     color : white;
     max-width: 500px;
     border-radius: 5px;
     padding: 8px;
     text-align: center;
     text-decoration: none;
+    font-size: x-large;
 }
 
 img
@@ -57,6 +52,19 @@ pre
     color : rgb(255, 255, 255) ;
     background-color: rgb(0, 0, 0);
     border-radius: 5px;
+    padding: 8px;
+}
+
+h1
+{
+    background-color: rgb(0, 0, 0);
+    color : white;
+    max-width: 500px;
+    border-radius: 5px;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-size: xx-large;
 }
 
 h2
@@ -71,111 +79,16 @@ img
 
 .SourceLink
 {
-    text-decoration: none;
+    text-decoration: underline;
+    font-size: x-large;
     color : blue
 }
 
-/*
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	vertical-align: baseline;
-}
-
-html,body {
-    background-color: black;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../PortfolioWebsite/BackgroundImage2.JPG');
-	background-size:cover;
-    background-repeat: repeat-y;
-    max-width: 2500px;
-    margin: auto;
-	line-height: 1;
-    height: 120%;
-}
-
-ol, ul {
-	list-style: none;
-}
-
-blockquote, q
+article
 {
-	quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-article,h1
-{
-    color:aliceblue;
-}
-
-.PageHead
-{
-    color: black;
-    font-weight: bolder;
-    background-color: cornflowerblue;
-    font-size: 200%;
-    border-radius: 14px;
-}
-
-.Link
-{
-    max-width: 500px;
-    align-items: center;
-    color : white;
-    padding-left: 5px;
-    padding-right: 5px;
-    text-align: center;
-    font-size: 100%;
-    background-color: rgb(17, 0, 255);
-    border-radius: 25px;
-    height:80%;
+    background-color: white;
+    color : black;
+    border-radius: 5px;
+    padding: 8px;
     text-decoration: none;
 }
-h1
-{
-    font-size: 200%;
-}
-
-h2
-{
-    font-size: 150%;
-}
-
-li
-{
-    max-width: 1500px;
-    font-size: 140%;
-}
-
-summary
-{
-    margin-top: 20px;
-    max-width: 1500px;
-} */
