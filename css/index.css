@@ -25,8 +25,8 @@ header
 header a
 {
     max-width: 1280px;
-    background-color: rgb(128, 156, 115);
-    color : white;
+    background-color: rgb(173, 222, 255);
+    color : rgb(0, 0, 0);
     max-width:min-content;
     border-radius: 5px;
     padding: 8px;
