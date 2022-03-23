@@ -3,6 +3,10 @@ add in more muted tones
 put in an alpha on the background image
 lower the radius on the buttons
 pick other colors for the code
+embed github activity on website
+
+
 
 TODO
-read bootstrap
+put in your contact info at the bottom
+take all projects and create separate pages for them
