@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Corbin Martin Hobby Projects</title>
         <link rel="stylesheet" type="text/css" href="../css/index.css" media="screen" />
+        <link href="../prism/prism.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -39,7 +40,7 @@
 
 
                 <pre>
-                    <code>
+                    <code class="language-cs">
 using System.Net.Sockets;
 
 public class Connection
@@ -176,7 +177,7 @@ public class Connection
                 <img src="../images/FastPrimes2.png">
 
                 <pre>
-                    <code>
+                    <code class="language-cs">
 // parallel foreach that uses a thread for each possible prime in the array to test if it is prime
 var ParrallelForEachResult = Parallel.ForEach(PossiblePrimes, new ParallelOptions(), (PossibleValue) =>
 {
@@ -214,7 +215,7 @@ var ParrallelForEachResult = Parallel.ForEach(PossiblePrimes, new ParallelOption
                 <img src="../images/toontanksExample.png">
 
                 <pre>
-                    <code>
+                    <code class="language-cpp">
 #include "PawnTank.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -279,6 +280,7 @@ void APawnTank::Rotate()
                     </code>
                 </pre>
             </article>
+            <script src="../prism/prism.js"></script>
         </main>
     </body>
 </html>

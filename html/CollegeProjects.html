@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Corbin Martin College Projects and Assignments</title>
         <link rel="stylesheet" type="text/css" href="../css/index.css" media="screen" />
+        <link href="../prism/prism.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -37,7 +38,7 @@
 
                 <!-- Knapsack MaxValue Function -->
                 <pre>
-                    <code>
+                    <code class="language-c">
 Answer MaxValue(int capacity, ItemDataBase database, bool firstCall)
 {
     //maxValueCache is better if it is static because it is only used by MaxValue() and it needs to be preserved between recursive calls
@@ -110,7 +111,7 @@ Answer MaxValue(int capacity, ItemDataBase database, bool firstCall)
 
                 <!-- PA4 Printing Traversal Algorithms -->
                 <pre>
-                    <code>
+                    <code class="language-c">
 //goes through the and prints the left node, the node, and the right node in an LNR traversal
 void LNR(Node root)
 {
@@ -161,7 +162,7 @@ void LRN(Node root)
 
                 <!-- PA3 hash algorithm -->
                 <pre>
-                    <code>
+                    <code class="language-c">
 //creates a index for an item to be stored in the hash table based on the input string
 int hash(char* plate)
 {
@@ -174,6 +175,7 @@ int hash(char* plate)
 }
                     </code>
                 </pre>
+                <script src="../prism/prism.js"></script>
             </article>
         </main>
     </body>
