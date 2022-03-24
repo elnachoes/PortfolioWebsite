@@ -5,12 +5,13 @@
 
 body
 {
-    background: linear-gradient(rgba(173, 163, 167, 0.9), rgba(173, 163, 167, 0.9)), url('../images/hexagonal.jpg');
+    background: linear-gradient(rgba(189, 172, 179, 0.9), rgba(189, 172, 179, 0.9)), url('../images/hexagonal.jpg');
     background-repeat: repeat;
     background-position: top center;
     min-height: 100%;
     margin: auto;
     padding: 16px;
+    max-width: 90%;
 }
 
 header
@@ -18,14 +19,23 @@ header
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 24px;
+    column-gap: 24px;
+    row-gap: 12px;
     justify-content: space-between;
+}
+
+header nav
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
 }
 
 header a
 {
     max-width: 1280px;
-    background-color: rgb(173, 222, 255);
+    background-color: rgb(198, 255, 206);
     color : rgb(0, 0, 0);
     max-width:min-content;
     border-radius: 5px;
@@ -33,6 +43,7 @@ header a
     text-align: center;
     text-decoration: none;
     font-size: 120%;
+    white-space: nowrap;
 }
 
 img
@@ -81,4 +92,18 @@ article
     border-radius: 5px;
     padding: 8px;
     text-decoration: none;
+}
+
+pre
+{
+    border-radius: 5px;
+}
+
+footer
+{
+    padding: 8px;
+    color: aliceblue;
+    background-color: black;
+    border-radius: 5px;
+    margin-top: 8px;
 }
