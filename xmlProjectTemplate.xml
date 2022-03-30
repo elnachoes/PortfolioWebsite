@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <title id="pageTitle">this is the second test header</title>
+
+    <h1 id="pageHeader">this is the second test header</h1>
+
+    <h2 id="shortDescription">this is my short brief description</h2>
+
+    <b id="longDescription">
+        <ul>
+            <li>this is a test of how the html comes out</li>
+            <li>this is a test of how the html comes out</li>
+            <li>this is a test of how the html comes out</li>
+        </ul>
+    </b>
+
+    <code id="code" class="language-python">print("hi there")</code>
+
+    <img id="image" src="https://logos-download.com/wp-content/uploads/2016/10/Python_logo_icon.png"/>
+</project>
