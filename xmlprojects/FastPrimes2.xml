@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <title id="pageTitle">Fast Primes 2</title>
+
+    <h1 id="pageHeader">Fast Primes 2</h1>
+
+    <h2 id="shortDescription">Primes 2 is a multi-threaded prime numbers calculator written in C# and Dotnet 6.</h2>
+
+    <a class="SourceLink" href="https://github.com/elnachoes/FastPrimes2"></a>
+
+    <b id="longDescription">
+        <ul>
+            <li>This is a sequel project to a single threaded prime numbers calculator written in C where the Sieve of Eratosthenes and other optimizations were used in order to significantly decrease the number of calculations needed in order to check if a number is prime. On a Ryzen 5 3600 cpu machine, the 5 millionth prime on the original single threaded Fast Primes project could be found in about 196 seconds.</li>
+            <li>Fast Primes 2 takes advantage of a parallel foreach from the Parallel library to multi-thread testing of potentially prime number.</li>
+            <li>The parallel foreach divides out potentially prime numbers and if they are prime they are added to a list inside of a mutex for thread safety that will be sorted by a LINQ statement and counted later on to determine the current prime position.</li>
+            <li>The application can be given 2 command line arguments for the Nth prime you wish to find and how many potentially prime numbers do you wish to test at a given iteration of the parallel foreach loop.</li>
+            <li>The project turned out to be very successful with the 5 millionth prime being calculated on a Ryzen 5 3600 cpu machine with 10k potential primes to test per iteration of the parallel foreach loop in just under 33 seconds.</li>
+            <li>The application performed even better with a Ryzen 9 5900x cpu machine under the same conditions finding the 5 millionth prime in just over 5 seconds.</li>
+        </ul>
+    </b>
+
+    <!-- dont forget to put in your language for correct syntax highlighting -->
+    <code id="code" class="language-cs">// parallel foreach that uses a thread for each possible prime in the array to test if it is prime
+var ParrallelForEachResult = Parallel.ForEach(PossiblePrimes, new ParallelOptions(), (PossibleValue) =>
+{
+    if (Prime.CheckIfPrime(PossibleValue))
+    {
+        lock (LockObject)
+        {
+            // if the number is prime add it to the list and increment the current prime position
+            FoundPrimes.Add(PossibleValue);
+            ++CurrentPrimePosition;
+        }
+    }
+});</code>
+
+    <img id="image" src="../images/FastPrimes2.png"/>
+</project>

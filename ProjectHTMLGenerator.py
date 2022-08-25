@@ -52,6 +52,13 @@ def GenerateHTMLProjects(inputDirectory : str, outDirectory : str) -> None:
                 except:
                     h2("add in your header1", id="shortDescription")
                     
+                try:
+                    a("Source Code",cls=xmlRoot.find("a").attrib["class"],href=xmlRoot.find("a").attrib["href"])
+                except:
+                    a("ERROR : SOURCE CODE LINK BROKEN")
+                    
+                    
+                    
                 #setup a short description with a b tag, ul tag, and li tags
                 with b(id="longDescription"):
                     with ul():
@@ -65,12 +72,14 @@ def GenerateHTMLProjects(inputDirectory : str, outDirectory : str) -> None:
                             li("ERROR : make sure you put a b tag with a ul tag and your li tags nested in both for the long description")
                 
                 #setup a code tag
-                try:
-                    code(xmlRoot.find("code").text, id="code", cls=xmlRoot.find("code").attrib["class"])
-                except:
-                    code("ERROR : check your code tag either there is not any code OR the language class was not specified")
-                    print("ERROR : check your code tag either there is not any code OR the language class was not specified")
                 
+                with pre():
+                    try:
+                        code(xmlRoot.find("code").text, id="code", cls=xmlRoot.find("code").attrib["class"])
+                    except:
+                        code("ERROR : check your code tag either there is not any code OR the language class was not specified")
+                        print("ERROR : check your code tag either there is not any code OR the language class was not specified")
+                    
                 #setup a img tag
                 try:
                     img(id="image",src=xmlRoot.find("img").attrib["src"])

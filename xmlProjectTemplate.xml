@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-    <title id="pageTitle">this is the second test header</title>
+    <title id="pageTitle">put in your page title here</title>
 
-    <h1 id="pageHeader">this is the second test header</h1>
+    <h1 id="pageHeader">put in the main header1 here</h1>
 
-    <h2 id="shortDescription">this is my short brief description</h2>
+    <h2 id="shortDescription">put in your header2 short description here</h2>
+
+    <a class="SourceLink",href=""><a/>
 
     <b id="longDescription">
         <ul>
-            <li>this is a test of how the html comes out</li>
-            <li>this is a test of how the html comes out</li>
-            <li>this is a test of how the html comes out</li>
+            <li>put your description here with li tags</li>
         </ul>
     </b>
+    
+    <!-- dont forget to put in your language for correct syntax highlighting -->
+    <code id="code" class="language-">put your code here</code>
 
-    <code id="code" class="language-python">print("hi there")</code>
-
-    <img id="image" src="https://logos-download.com/wp-content/uploads/2016/10/Python_logo_icon.png"/>
+    <img id="image" src="put in your source here"/>
 </project>
